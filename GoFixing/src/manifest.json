@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "GoFixing",
+  "description": "又到了激动人心的解 Bug 时间~",
+  "version": "1.0.3",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://jira.meitu.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://jira.meitu.com/*"
+      ],
+      "css": [
+        "js/toastr/toastr.min.css"
+      ],
+      "js": [
+        "js/toastr/jquery-3.3.1.min.js",
+        "js/toastr/toastr.js",
+        "js/crawl.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "options_ui": {
+    "page": "html/options.html"
+  },
+  "commands": {
+    "generate_commit_template": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "生成提交模板"
+    },
+    "just_copy_bug_id": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+J",
+        "mac": "Command+Shift+J"
+      },
+      "description": "复制 BugID"
+    }
+  }
+}
